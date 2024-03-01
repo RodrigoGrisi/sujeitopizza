@@ -1,5 +1,9 @@
 import Head from "next/head";
-import styles from "../styles/Home.module.scss";
+import styles from "../styles/home.module.scss";
+import Image from "next/image";
+
+import logoImg from "../../public/logo.svg";
+import { Input } from "@/components/ui/input";
 
 export default function Home() {
   return (
@@ -7,8 +11,14 @@ export default function Home() {
       <Head>
         <title>PizzaDEV - Area de login </title>
       </Head>
-      <div className={styles.container}>
-        <h1> Sujeito Pizza</h1>
+      <div className={styles.containerCenter}>
+        <Image src={logoImg} alt="logo Sujeito Pizzaria" />
+        <div className={styles.login}>
+          <form className="formLogin">
+            <Input placeholder="Digite seu email" type="text"/>
+            <Input placeholder="Digite sua senha" type="password"/>
+          </form>
+        </div>
       </div>
     </>
   );
