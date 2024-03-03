@@ -6,9 +6,25 @@ import logoImg from "../../public/logo.svg";
 import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
 
+import { AuthContext } from "@/contexts/AuthContext";
+import { FormEvent, useContext } from "react";
+
 import Link from "next/link";
 
 export default function Home() {
+  const { isAuthenticated, signIn } = useContext(AuthContext);
+
+  async function handleLogin(event: FormEvent) {
+    event.preventDefault();
+
+    let data = {
+      email: "Rodricosta1995@gmail.com",
+      password: "03032024",
+    };
+
+    await signIn(data);
+  }
+
   return (
     <>
       <Head>
@@ -19,7 +35,7 @@ export default function Home() {
         <Image src={logoImg} alt="logo Sujeito Pizzaria" />
 
         <div className={styles.login}>
-          <form>
+          <form onSubmit={handleLogin}>
             <Input placeholder="Digite seu email" type="text" />
             <Input placeholder="Digite sua senha" type="password" />
             <Button loading={false} type="submit">
