@@ -7,19 +7,24 @@ import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
 
 import { AuthContext } from "@/contexts/AuthContext";
-import { FormEvent, useContext } from "react";
+import { FormEvent, useContext, useState } from "react";
 
 import Link from "next/link";
 
 export default function Home() {
   const { isAuthenticated, signIn } = useContext(AuthContext);
 
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const [loading, setLoading] = useState(false);
+
   async function handleLogin(event: FormEvent) {
     event.preventDefault();
 
     let data = {
-      email: "Rodricosta1995@gmail.com",
-      password: "03032024",
+      email,
+      password,
     };
 
     await signIn(data);
@@ -36,8 +41,18 @@ export default function Home() {
 
         <div className={styles.login}>
           <form onSubmit={handleLogin}>
-            <Input placeholder="Digite seu email" type="text" />
-            <Input placeholder="Digite sua senha" type="password" />
+            <Input
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Digite seu email"
+              type="text"
+            />
+            <Input
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Digite sua senha"
+              type="password"
+            />
             <Button loading={false} type="submit">
               Acessar
             </Button>
