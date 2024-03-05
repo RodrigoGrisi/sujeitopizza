@@ -16,11 +16,17 @@ export default function Home() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
   const [loading, setLoading] = useState(false);
 
   async function handleLogin(event: FormEvent) {
     event.preventDefault();
+
+    if (email === "" || password === "") {
+      alert("Digite email e senha");
+      return;
+    }
+
+    setLoading(true);
 
     let data = {
       email,
@@ -28,6 +34,8 @@ export default function Home() {
     };
 
     await signIn(data);
+
+    setLoading(false);
   }
 
   return (
@@ -53,7 +61,7 @@ export default function Home() {
               placeholder="Digite sua senha"
               type="password"
             />
-            <Button loading={false} type="submit">
+            <Button loading={loading} type="submit">
               Acessar
             </Button>
           </form>
