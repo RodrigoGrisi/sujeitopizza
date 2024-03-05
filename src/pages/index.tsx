@@ -2,12 +2,16 @@ import Head from "next/head";
 import styles from "../styles/home.module.scss";
 import Image from "next/image";
 
+import { toast } from "react-toastify";
+
 import logoImg from "../../public/logo.svg";
 import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
 
 import { AuthContext } from "@/contexts/AuthContext";
 import { FormEvent, useContext, useState } from "react";
+
+import { canSSRGuest } from "../utils/canSSRGuest";
 
 import Link from "next/link";
 
@@ -22,7 +26,7 @@ export default function Home() {
     event.preventDefault();
 
     if (email === "" || password === "") {
-      alert("Digite email e senha");
+      toast.error("Preencha o email e senha");
       return;
     }
 
@@ -73,3 +77,9 @@ export default function Home() {
     </>
   );
 }
+
+export const getServerSideProps = canSSRGuest(async (ctx) => {
+  return {
+    props: {},
+  };
+});

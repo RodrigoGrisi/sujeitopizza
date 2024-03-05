@@ -7,8 +7,38 @@ import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
 
 import Link from "next/link";
+import { useState, FormEvent, useContext } from "react";
+import { AuthContext } from "@/contexts/AuthContext";
+import { toast } from "react-toastify";
 
 export default function signUp() {
+  const { signUp } = useContext(AuthContext);
+
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const [loading, setLoading] = useState(false);
+
+  async function handleSignUp(event: FormEvent) {
+    event.preventDefault();
+
+    if (email === "" || password === "" || email === "") {
+      toast.error("Preencha todos os campos");
+      return;
+    }
+
+    setLoading(true);
+
+    let data = {
+      name,
+      email,
+      password,
+    };
+    await signUp(data);
+    setLoading(false);
+  }
+
   return (
     <>
       <Head>
@@ -20,11 +50,26 @@ export default function signUp() {
 
         <div className={styles.login}>
           <h1>Criando sua conta</h1>
-          <form>
-            <Input placeholder="Digite seu nome" type="text" />
-            <Input placeholder="Digite sua senha" type="password" />
-            <Input placeholder="Digite sua senha" type="password" />
-            <Button loading={false} type="submit">
+          <form onSubmit={handleSignUp}>
+            <Input
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Digite seu nome"
+              type="text"
+            />
+            <Input
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Digite seu Email"
+              type="email"
+            />
+            <Input
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Digite sua senha"
+              type="password"
+            />
+            <Button loading={loading} type="submit">
               Cadastrar
             </Button>
           </form>

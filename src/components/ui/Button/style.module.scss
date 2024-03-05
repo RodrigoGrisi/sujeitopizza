@@ -6,7 +6,9 @@
   color: var(--white);
   border-radius: 0.5rem;
   transition: all 0.2s;
-
+  display: flex;
+  justify-content: center;
+  align-items: center;
 &:hover{
   filter: brightness(1.50);
 }
