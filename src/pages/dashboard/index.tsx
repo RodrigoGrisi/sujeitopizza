@@ -1,10 +1,18 @@
 import { canSSRAuth } from "../../utils/canSSRAuth";
+import Head from "next/head";
+import { Header } from "@/components/Header";
 
 export default function Dashboard() {
   return (
-    <div>
-      <h1 style={{ color: "white" }}> Welcome to the Dashboard</h1>
-    </div>
+    <>
+      <Head>
+        <title>Dashboard - Pizzaria</title>
+      </Head>
+      <Header />
+      <div>
+        <h1> Painel Admnistrativo</h1>
+      </div>
+    </>
   );
 }
 

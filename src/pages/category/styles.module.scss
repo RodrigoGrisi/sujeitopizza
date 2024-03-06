@@ -1,0 +1,37 @@
+.container {
+  max-width: 720px;
+  margin: 4rem auto;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+
+  h1 {
+    color: var(--white);
+  }
+
+}
+
+.form {
+
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  .input {
+    border: 1px solid var(--gray-100);
+    padding: 1rem;
+    height: 36px;
+    border-radius: 6px;
+    // background-color: var(--dark-500);
+    // color: var(--white);
+  }
+
+  button {
+    padding: 0.5rem;
+    border-radius: 6px;
+    background-color: var(--green-900);
+    font-weight: 600;
+  }
+
+}
