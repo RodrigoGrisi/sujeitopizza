@@ -3,14 +3,27 @@ import Head from "next/head";
 import styles from "./styles.module.scss";
 import { useState, FormEvent } from "react";
 
+import { canSSRAuth } from "../../utils/canSSRAuth";
+
+import { setupAPIClient } from "../../services/api";
+import { toast } from "react-toastify";
+
 export default function Category() {
   const [name, setName] = useState("");
 
   async function handleRegister(event: FormEvent) {
     event.preventDefault();
 
-    alert("Categoria:\n" + name);
+    if (name === "") {
+      return;
+    }
 
+    const apiClient = setupAPIClient();
+    await apiClient.post("/category", {
+      name: name,
+    });
+
+    toast.success("Categoria adicionada com sucesso.");
     setName("");
   }
 
@@ -40,3 +53,9 @@ export default function Category() {
     </>
   );
 }
+
+export const getServerSideProps = canSSRAuth(async (ctx) => {
+  return {
+    props: {},
+  };
+});
