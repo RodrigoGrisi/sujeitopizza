@@ -12,8 +12,12 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  // justify-content: center;
 
+  h1 {
+    margin-bottom: 12px;
+    color: var(--white);
+  }
 
   button {
     background-color: transparent;
@@ -22,9 +26,6 @@
   }
 
 
-  h1 {
-    color: var(--white);
-  }
 }
 
 .listOrders {
